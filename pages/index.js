@@ -44,13 +44,22 @@ function Data({
           <p>{recovered} recovered cases</p>
         </section>
 
-        <section className="calculation-info">
-          <h5>Estimations based on:</h5>
+        <section className="info">
+          <h5>Estimations based on</h5>
           <ul>
             <li>Death-rate: {deathRate * 100}%</li>
             <li>Symptom to death: {daysFromSymptomToDeath} days</li>
             <li>Cases double in: {daysToDoubleCases} days</li>
           </ul>
+        </section>
+
+        <section className="info">
+          <p>
+            Made by <a href="mailto:litemerafrukt@gmail.com">litemerafrukt</a>
+          </p>
+          <p>
+            Repo @ <a href="https://github.com/litemerafrukt/swedencovid19">github</a>
+          </p>
         </section>
       </main>
 
@@ -66,7 +75,7 @@ function Data({
           margin: 3rem 0 5rem 0;
         }
 
-        .calculation-info {
+        .info {
           font-size: small;
         }
       `}</style>
