@@ -2,9 +2,11 @@ import Head from "next/head"
 import { swedenCovid19 } from "../serversideData/sweden"
 import {
   deathRate,
+  daysInkubationPeriod,
   daysFromSymptomToDeath,
   daysToDoubleCases,
-  estimateCasesBasedOnDeath
+  estimateCasesBasedOnDeath,
+  estimateInfectedBasedOnDeath
 } from "../calculations/estimateCases"
 
 export default function Index(props) {
@@ -21,7 +23,8 @@ function Data({
   lastUpdate: updated,
   recovered: { value: recovered }
 }) {
-  const estimation = estimateCasesBasedOnDeath(deaths)
+  const estimationInfected = estimateInfectedBasedOnDeath(deaths)
+  const estimationCases = estimateCasesBasedOnDeath(deaths)
 
   return (
     <div className="container">
@@ -40,7 +43,8 @@ function Data({
 
         <section className="cases">
           <p>{confirmed} confirmed cases.</p>
-          <p>{estimation} estimated cases.</p>
+          <p>{estimationCases} estimated cases.</p>
+          <p>{estimationInfected} estimated infected.</p>
           <p>{recovered} recovered cases</p>
         </section>
 
@@ -48,6 +52,7 @@ function Data({
           <h5>Estimations based on</h5>
           <ul>
             <li>Death-rate: {deathRate * 100}%</li>
+            <li>Inkubation period: {daysInkubationPeriod} days</li>
             <li>Symptom to death: {daysFromSymptomToDeath} days</li>
             <li>Cases double in: {daysToDoubleCases} days</li>
           </ul>
