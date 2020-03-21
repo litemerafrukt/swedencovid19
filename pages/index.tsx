@@ -1,16 +1,13 @@
 import Head from "next/head"
 import { swedenCovid19 } from "../serversideData/sweden"
+import { estimateBasedOnDeath } from "../model/estimateCases"
 import {
   deathRate,
   inkubationPeriod,
   fromSymptomToDeath,
-  timeToDoubleCases,
-  estimateCasesBasedOnDeath,
-  estimateInfectedBasedOnDeath
-} from "../calculations/estimateCases"
-
+  timeToDoubleCases
+} from "../model/defaultSicknessConstants"
 import { CovidCountryData, FetchError, hasFetchError } from "../model/types"
-
 
 type IndexProps = CovidCountryData | FetchError
 
@@ -28,8 +25,18 @@ function Data({
   lastUpdate: updated,
   recovered: { value: recovered }
 }: CovidCountryData) {
-  const estimationInfected = estimateInfectedBasedOnDeath(deaths)
-  const estimationCases = estimateCasesBasedOnDeath(deaths)
+  const estimationInfected = estimateBasedOnDeath(
+    deaths,
+    deathRate,
+    inkubationPeriod + fromSymptomToDeath,
+    timeToDoubleCases
+  )
+  const estimationCases = estimateBasedOnDeath(
+    deaths,
+    deathRate,
+    fromSymptomToDeath,
+    timeToDoubleCases
+  )
 
   return (
     <div className="container">
