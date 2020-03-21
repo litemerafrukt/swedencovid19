@@ -8,6 +8,8 @@ import {
   timeToDoubleCases
 } from "../model/defaultSicknessConstants"
 import { CovidCountryData, FetchError, hasFetchError } from "../model/types"
+import Footer from "../components/Footer"
+import Estimate from "../components/Estimate"
 
 type IndexProps = CovidCountryData | FetchError
 
@@ -19,25 +21,7 @@ export default function Index(props: IndexProps) {
   return <Data {...props} />
 }
 
-function Data({
-  confirmed: { value: confirmed },
-  deaths: { value: deaths },
-  lastUpdate: updated,
-  recovered: { value: recovered }
-}: CovidCountryData) {
-  const estimationInfected = estimateBasedOnDeath(
-    deaths,
-    deathRate,
-    inkubationPeriod + fromSymptomToDeath,
-    timeToDoubleCases
-  )
-  const estimationCases = estimateBasedOnDeath(
-    deaths,
-    deathRate,
-    fromSymptomToDeath,
-    timeToDoubleCases
-  )
-
+function Data({ lastUpdate: updated, ...caseData }: CovidCountryData) {
   return (
     <div className="container">
       <Head>
@@ -53,32 +37,9 @@ function Data({
         <h1 className="heading">Sweden</h1>
         <span className="date">{new Date(updated).toLocaleDateString("se")}</span>
 
-        <section className="cases">
-          <p>{confirmed} confirmed cases.</p>
-          <p>{deaths} deaths.</p>
-          <p>{recovered} recovered cases.</p>
-          <p>{estimationCases} estimated cases.</p>
-          <p>{estimationInfected} estimated infected.</p>
-        </section>
+        <Estimate {...caseData} />
 
-        <section>
-          <h5>Estimations based on</h5>
-          <ul>
-            <li>Death-rate: {deathRate * 100}%</li>
-            <li>Inkubation period: {inkubationPeriod} days</li>
-            <li>Symptom to death: {fromSymptomToDeath} days</li>
-            <li>Cases double in: {timeToDoubleCases} days</li>
-          </ul>
-        </section>
-
-        <section className="info">
-          <p>
-            Made by <a href="mailto:litemerafrukt@gmail.com">litemerafrukt</a>
-          </p>
-          <p>
-            Repo @ <a href="https://github.com/litemerafrukt/swedencovid19">github</a>
-          </p>
-        </section>
+        <Footer />
       </main>
 
       <style jsx>{`
@@ -88,14 +49,6 @@ function Data({
         }
         .date {
           font-size: small;
-        }
-        .cases {
-          margin: 3em 0;
-        }
-
-        .info {
-          font-size: small;
-          margin: 3em 0;
         }
       `}</style>
 

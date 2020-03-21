@@ -11,4 +11,6 @@ export type CovidCountryData = Readonly<{
   recovered: { value: number }
 }>
 
+export type CovidCaseData = Omit<CovidCountryData, "lastUpdate">
+
 export type Days = number & { _brand: "days" }
