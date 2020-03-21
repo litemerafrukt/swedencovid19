@@ -48,12 +48,13 @@ function Data({
 
         <section className="cases">
           <p>{confirmed} confirmed cases.</p>
+          <p>{deaths} deaths.</p>
+          <p>{recovered} recovered cases.</p>
           <p>{estimationCases} estimated cases.</p>
           <p>{estimationInfected} estimated infected.</p>
-          <p>{recovered} recovered cases</p>
         </section>
 
-        <section className="info">
+        <section>
           <h5>Estimations based on</h5>
           <ul>
             <li>Death-rate: {deathRate * 100}%</li>
@@ -82,11 +83,12 @@ function Data({
           font-size: small;
         }
         .cases {
-          margin: 3rem 0 5rem 0;
+          margin: 3em 0;
         }
 
         .info {
           font-size: small;
+          margin: 3em 0;
         }
       `}</style>
 
