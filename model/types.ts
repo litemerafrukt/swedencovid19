@@ -1,12 +1,14 @@
-export type Error = { error: string }
+export type FetchError = Readonly<{ error: string }>
 
-export type CovidCountryData = {
+export function hasFetchError(props: FetchError | any): props is FetchError {
+  return (props as FetchError).error !== undefined
+}
+
+export type CovidCountryData = Readonly<{
   confirmed: { value: number }
   deaths: { value: number }
   lastUpdate: string
   recovered: { value: number }
-}
+}>
 
-export function hasError(props: Error | any): props is Error {
-  return (props as Error).error !== undefined
-}
+export type Days = number & { _brand: "days" }

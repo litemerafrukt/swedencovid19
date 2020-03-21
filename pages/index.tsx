@@ -2,20 +2,20 @@ import Head from "next/head"
 import { swedenCovid19 } from "../serversideData/sweden"
 import {
   deathRate,
-  daysInkubationPeriod,
-  daysFromSymptomToDeath,
-  daysToDoubleCases,
+  inkubationPeriod,
+  fromSymptomToDeath,
+  timeToDoubleCases,
   estimateCasesBasedOnDeath,
   estimateInfectedBasedOnDeath
 } from "../calculations/estimateCases"
 
-import { CovidCountryData, Error, hasError } from "../model/types"
+import { CovidCountryData, FetchError, hasFetchError } from "../model/types"
 
 
-type IndexProps = CovidCountryData | Error
+type IndexProps = CovidCountryData | FetchError
 
 export default function Index(props: IndexProps) {
-  if (hasError(props)) {
+  if (hasFetchError(props)) {
     return <div>{props.error}</div>
   }
 
@@ -57,9 +57,9 @@ function Data({
           <h5>Estimations based on</h5>
           <ul>
             <li>Death-rate: {deathRate * 100}%</li>
-            <li>Inkubation period: {daysInkubationPeriod} days</li>
-            <li>Symptom to death: {daysFromSymptomToDeath} days</li>
-            <li>Cases double in: {daysToDoubleCases} days</li>
+            <li>Inkubation period: {inkubationPeriod} days</li>
+            <li>Symptom to death: {fromSymptomToDeath} days</li>
+            <li>Cases double in: {timeToDoubleCases} days</li>
           </ul>
         </section>
 
