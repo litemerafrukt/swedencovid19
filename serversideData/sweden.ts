@@ -18,7 +18,14 @@ export async function swedenCovid19(): Promise<{ props: CovidCountryData | Fetch
 
     const data = await response.json()
 
-    return { props: data }
+    return {
+      props: {
+        confirmed: data.confirmed.value,
+        deaths: data.deaths.value,
+        updated: data.lastUpdate,
+        recovered: data.recovered.value
+      }
+    }
   } catch (e) {
     return { props: { error: e.message } }
   } finally {

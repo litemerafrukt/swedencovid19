@@ -21,7 +21,7 @@ export default function Index(props: IndexProps) {
   return <Data {...props} />
 }
 
-function Data({ lastUpdate: updated, ...caseData }: CovidCountryData) {
+function Data({ updated, ...caseData }: CovidCountryData) {
   return (
     <div className="container">
       <Head>

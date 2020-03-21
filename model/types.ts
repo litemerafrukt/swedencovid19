@@ -5,12 +5,12 @@ export function hasFetchError(props: FetchError | any): props is FetchError {
 }
 
 export type CovidCountryData = Readonly<{
-  confirmed: { value: number }
-  deaths: { value: number }
-  lastUpdate: string
-  recovered: { value: number }
+  confirmed: number
+  deaths: number
+  updated: string
+  recovered: number
 }>
 
-export type CovidCaseData = Omit<CovidCountryData, "lastUpdate">
+export type CovidCaseData = Omit<CovidCountryData, "updated">
 
 export type Days = number & { _brand: "days" }

@@ -7,11 +7,7 @@ import {
   timeToDoubleCases
 } from "../model/defaultSicknessConstants"
 
-export default function Estimate({
-  confirmed: { value: confirmed },
-  deaths: { value: deaths },
-  recovered: { value: recovered }
-}: CovidCaseData) {
+export default function Estimate({ confirmed, deaths, recovered }: CovidCaseData) {
   const estimationInfected = estimateBasedOnDeath(
     deaths,
     deathRate,
