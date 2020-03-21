@@ -9,8 +9,13 @@ import {
   estimateInfectedBasedOnDeath
 } from "../calculations/estimateCases"
 
-export default function Index(props) {
-  if (props.error) {
+import { CovidCountryData, Error, hasError } from "../model/types"
+
+
+type IndexProps = CovidCountryData | Error
+
+export default function Index(props: IndexProps) {
+  if (hasError(props)) {
     return <div>{props.error}</div>
   }
 
@@ -22,7 +27,7 @@ function Data({
   deaths: { value: deaths },
   lastUpdate: updated,
   recovered: { value: recovered }
-}) {
+}: CovidCountryData) {
   const estimationInfected = estimateInfectedBasedOnDeath(deaths)
   const estimationCases = estimateCasesBasedOnDeath(deaths)
 

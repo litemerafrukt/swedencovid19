@@ -1,8 +1,10 @@
 import AbortController from "abort-controller"
 import fetch from "isomorphic-unfetch"
+import { CovidCountryData, Error } from "../model/types"
 
-export async function swedenCovid19() {
-  let timeoutId
+export async function swedenCovid19(): Promise<{ props: CovidCountryData | Error }> {
+  let timeoutId: NodeJS.Timeout | undefined = undefined
+
   try {
     const controller = new AbortController()
     timeoutId = setTimeout(() => controller.abort(), 4000)
@@ -20,6 +22,6 @@ export async function swedenCovid19() {
   } catch (e) {
     return { props: { error: e.message } }
   } finally {
-    clearTimeout(timeoutId)
+    timeoutId !== undefined && clearTimeout(timeoutId)
   }
 }

@@ -11,6 +11,7 @@ module.exports = {
     SharedArrayBuffer: "readonly",
     cy: "readonly"
   },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -18,6 +19,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  plugins: ["react"],
-  rules: { "react/react-in-jsx-scope": "off", "react/prop-types": "off" }
+  plugins: ["react", "@typescript-eslint"],
+  rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off"
+  }
 }
