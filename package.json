@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
@@ -15,6 +16,7 @@
     "react-dom": "16.13.0"
   },
   "devDependencies": {
+    "cypress": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0"
   }
