@@ -1,12 +1,5 @@
 import Head from "next/head"
 import { swedenCovid19 } from "../serversideData/sweden"
-import { estimateBasedOnDeath } from "../model/estimateCases"
-import {
-  deathRate,
-  inkubationPeriod,
-  fromSymptomToDeath,
-  timeToDoubleCases
-} from "../model/defaultSicknessConstants"
 import { CovidCountryData, FetchError, hasFetchError } from "../model/types"
 import Footer from "../components/Footer"
 import Estimate from "../components/Estimate"
